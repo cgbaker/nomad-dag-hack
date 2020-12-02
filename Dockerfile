@@ -1,3 +1,3 @@
 FROM scratch
 COPY nomad-dag-hack /
-CMD ["/nomad-dag-hack"]
+ENTRYPOINT ["/nomad-dag-hack"]
