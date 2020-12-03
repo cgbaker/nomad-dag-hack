@@ -1,0 +1,42 @@
+job "[[$.job_id]]" {
+  name = "[[$.job_name]]"
+  datacenters = ["dc1"]
+  type = "batch"
+  [[ range $name, $file := $.fragments ]] 
+  group "[[ $name ]]" {
+    [[ fileContents $file ]]    
+    count = 0
+    task "engage" {
+      lifecycle {
+        hook = "poststop"  
+      }
+      driver = "docker"
+      config {
+        image = "cgbaker/nomad-dag-hack"          
+        args = [ [[ with $next := get $.graph $name ]]
+                 [[ range $i, $n := $next ]][[if $i]],[[end]]"[[$n]]"[[ end ]]
+                 [[ end ]] ]
+      }
+      env {
+        NOMAD_ADDR = "[[ env "NOMAD_ADDR" ]]"
+      }
+    }
+  }
+  [[ end ]]
+ 
+  group "🚀" {
+    count = 1
+    task "engage" {
+      driver = "docker"
+      config {
+        image = "cgbaker/nomad-dag-hack"          
+        args = [ [[ with $next := get $.graph "" ]]
+                 [[ range $i, $n := $next ]][[if $i]],[[end]]"[[$n]]"[[ end ]]
+                 [[ end ]] ]
+      }
+      env {
+        NOMAD_ADDR = "[[ env "NOMAD_ADDR" ]]"
+      }
+    }
+  }
+}

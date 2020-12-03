@@ -1,0 +1,17 @@
+{
+  "job_id": "dags",
+  "job_name": "you like dags? 🐕",
+  "fragments": {
+    "a": "frag-a.hcl",
+    "b": "frag-b.hcl",
+    "c": "frag-c.hcl",
+    "d": "frag-d.hcl"
+  }, 
+  "graph": {
+    "": ["a"],
+    "a": ["b"],
+    "b": ["c","d"],
+    "c": [],
+    "d": []
+  }     
+}
