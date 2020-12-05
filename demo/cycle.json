@@ -1,0 +1,17 @@
+{
+  "job_id": "joke",
+  "job_name": "knock knock 😂 😂 😂",
+  "fragments": {
+    "knock knock": "frag-d.hcl",
+    "who's there?": "frag-d.hcl",
+    "banana 🍌": "frag-d.hcl",
+    "banana who?": "frag-d.hcl"
+  }, 
+  "graph": {
+    "": ["knock knock"],
+    "knock knock": ["who's there?"],
+    "who's there?": ["banana 🍌"],
+    "banana 🍌": ["banana who?"],
+    "banana who?": ["knock knock"]
+  }     
+}

@@ -2,6 +2,6 @@ task "gamma" {
   driver = "raw_exec"
   config {
     command = "sleep"
-    args = ["10"]
+    args = ["5"]
   }
 }
